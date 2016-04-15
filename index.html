@@ -7,8 +7,9 @@
       body {
         font-family: "Open Sans", ariel;
         letter-spacing: 0.1em;
+        background-color: #DDDDDD;
       }
-      div.content {
+      div.doc {
         width: 1000px;
         margin: auto;
       }
@@ -26,320 +27,363 @@
         color: red;
         font-weight: bold;
       }
+
+      div.box {
+        background-color:#FFFFFF;
+        padding: 0px;
+        margin: 0px;
+      }
+      div.header {
+        background-color: #555555;
+        color:#FFFFFF;
+        padding: 20px;
+        font-size: 16pt;
+        margin-top: 30px;
+      }
+      div.content {
+        padding: 20px;
+      }
+      div.title {
+        font-size: 20pt;
+        padding: 20px;
+        background-color: #FFFFFF;
+      }
+      div.subtitle {
+        font-size: 12pt;
+        padding: 20px;
+        background-color: #FFFFFF;
+      }
     </style>
   </head>
   <body>
-    <div class="content">
-      <h3>Boston Marathon Qualifier Analysis</h3>
-      <h4>tl;dr Estimated 2017 Boston Marathon Cutoff is <span style='color:red'>2:09</span></h4>
-
-      <p>
+    <div class="doc">
+      <div class="title">
+        Boston Marathon Qualifier Analysis
+      </div>
+      <div class="subtitle">
+        tl;dr Estimated 2017 Boston Marathon Cutoff is <span style='color:red; font-weight:bold'>2:09</span></h4>
+        </br>
+        </br>
         Feel free to email me with any comments or questions:
         <span style='font-family:courier'>&#106;&#101;&#114;&#101;&#109;&#121;&#64;&#98;&#113;&#114;&#117;&#110;&#46;&#99;&#111;&#109;</span>
-      </p>
-
-      <p>
-        See <a href="http://boston-qualifier-stats.blogspot.com/">http://boston-qualifier-stats.blogspot.com/</a> and <a href="http://www.namethatbostonmarathoncutoff.com/">http://www.namethatbostonmarathoncutoff.com/</a>.
-      </p>
-      <p>
-        First, I tried to reproduce these analyses as closely as possible.
-        There are obviously differences in the minutia of scraping, parsing, what to do with people who only have an age
-        group, etc, that introduce differences. Anyhow, this is what I got:
         <br/>
-        <h4>Q2016 Analysis</h4>
-        <ul>
-          <li>2015 cutoff: 62 seconds</li>
-          <li>For 2015, 45,237 people met the cutoff.</li>
-          <li>For 2016, 45,369 people met the same cutoff.</li>
-          <li>For 2016, 45,237 people met a cutoff of 65 seconds.</li>
-          <li>Actual 2016 cutoff: 147 seconds</li>
-        </ul>
-        This estimate of 65 seconds is not very close to the <a href="http://boston-qualifier-stats.blogspot.com/2015/09/final-projected-boston-marathon-2016.html">previous estimate</a>
-        of 91 seconds. The added caveat was that without the "outlier", Berlin, the prediction was 130 seconds.
-        It's not clear why my estimate using the same method is so different.
         <br/>
-        <h4>Q2017 Analysis</h4>
-        <ul>
-          <li>2016 cutoff: 147 seconds</li>
-          <li>For 2016, 24,784 people met the cutoff.</li>
-          <li>For 2017, 24,311 people met the same cutoff.</li>
-          <li>For 2017, 24,784 people met a cutoff of 122 seconds.</li>
-        </ul>
-        This is largely consistent with the <a href="http://www.namethatbostonmarathoncutoff.com/2016/03/2015-philadelphia-marathon-cutoff-update.html">current estimate</a>
-        of 117 seconds.
-      </p>
+        I will be updating this page with new races as they are run.
+      </div>
 
-      <h3>Another Way</h3>
-      <p>
-        I wanted to come up with a better way. Most notably, I want to avoid caveats and ignoring individual races (ex. Berlin)
-        by explicitly modeling the relative contributions of each race. I have also run the analysis over past years so that we
-        can actually estimate its accuracy and hopefully improve over the more straightforward analyses above. Here it is. 
-      </p>
+      <div class="box">
+        <div class="header">
+          Reproducing Past Analyses
+        </div>
+        <div class="content">
+          <p>
+            See <a href="http://boston-qualifier-stats.blogspot.com/">http://boston-qualifier-stats.blogspot.com/</a> and <a href="http://www.namethatbostonmarathoncutoff.com/">http://www.namethatbostonmarathoncutoff.com/</a>.
+          </p>
+          <p>
+            First, I tried to reproduce these analyses as closely as possible.
+            There are obviously differences in the minutia of scraping, parsing, what to do with people who only have an age
+            group, etc, that introduce differences. Anyhow, this is what I got:
+            <br/>
+            <h4>Q2016 Analysis</h4>
+            <ul>
+              <li>2015 cutoff: 62 seconds</li>
+              <li>For 2015, 45,237 people met the cutoff.</li>
+              <li>For 2016, 45,369 people met the same cutoff.</li>
+              <li>For 2016, 45,237 people met a cutoff of 65 seconds.</li>
+              <li>Actual 2016 cutoff: 147 seconds</li>
+            </ul>
+            This estimate of 65 seconds is not very close to the <a href="http://boston-qualifier-stats.blogspot.com/2015/09/final-projected-boston-marathon-2016.html">previous estimate</a>
+            of 91 seconds. The added caveat was that without the "outlier", Berlin, the prediction was 130 seconds.
+            It's not clear why my estimate using the same method is so different.
+            <br/>
+            <h4>Q2017 Analysis</h4>
+            <ul>
+              <li>2016 cutoff: 147 seconds</li>
+              <li>For 2016, 24,784 people met the cutoff.</li>
+              <li>For 2017, 24,311 people met the same cutoff.</li>
+              <li>For 2017, 24,784 people met a cutoff of 122 seconds.</li>
+            </ul>
+            This is largely consistent with the <a href="http://www.namethatbostonmarathoncutoff.com/2016/03/2015-philadelphia-marathon-cutoff-update.html">current estimate</a>
+            of 117 seconds.
+          </p>
+        </div>
+      </div>
 
-      <p>
-        These are the top 25 marathons contributing runners to Boston in 2015 <i>or</i> 2016 (27 total).
-        Those in <span style='color:red'>red</span> are qualifiers for the 2017 Boston marathon.
-      </p>
+      <div class="box">
+        <div class="header">
+          The Complicated Way
+        </div>
+        <div class="content">
+          <p>
+            I wanted to come up with a better way. Most notably, I want to avoid caveats and ignoring individual races (ex. Berlin)
+            by explicitly modeling the relative contributions of each race. I have also run the analysis over past years so that we
+            can actually estimate its accuracy and hopefully improve over the more straightforward analyses above. Here it is. 
+          </p>
 
-      <table style="margin:auto">
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>2015 Date</th>
-            <th>2016 Date</th>
-            <th>Q2016 Finishers</th>
-            <th>Q2016 Qualifiers</th>
-            <th>Q2017 Finishers</th>
-            <th>Q2017 Qualifiers</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Berlin Marathon</td>
-            <td class='current'>09-27</td>
-            <td>09-25</td>
-            <td>28943</td>
-            <td>5120</td>
-            <td>32929</td>
-            <td>5566</td>
-          </tr>
-          <tr>
-            <td>St. George Marathon</td>
-            <td class='current'>10-03</td>
-            <td>10-04</td>
-            <td>5824</td>
-            <td>1173</td>
-            <td>5481</td>
-            <td>1087</td>
-          </tr>
-          <tr>
-            <td>Portland Marathon</td>
-            <td class='current'>10-04</td>
-            <td>10-09</td>
-            <td>6431</td>
-            <td>495</td>
-            <td>5716</td>
-            <td>483</td>
-          </tr>
-          <tr>
-            <td>Twin Cities Marathon</td>
-            <td class='current'>10-04</td>
-            <td>10-09</td>
-            <td>8853</td>
-            <td>1171</td>
-            <td>8541</td>
-            <td>1063</td>
-          </tr>
-          <tr>
-            <td>Chicago Marathon</td>
-            <td class='current'>10-11</td>
-            <td>10-09</td>
-            <td>40599</td>
-            <td>4457</td>
-            <td>37445</td>
-            <td>4099</td>
-          </tr>
-          <tr>
-            <td>Baystate Marathon</td>
-            <td class='current'>10-18</td>
-            <td>10-16</td>
-            <td>1575</td>
-            <td>472</td>
-            <td>1446</td>
-            <td>430</td>
-          </tr>
-          <tr>
-            <td>Columbus Marathon</td>
-            <td class='current'>10-18</td>
-            <td>10-16</td>
-            <td>5461</td>
-            <td>697</td>
-            <td>4443</td>
-            <td>592</td>
-          </tr>
-          <tr>
-            <td>Toronto Waterfront Marathon</td>
-            <td class='current'>10-18</td>
-            <td>10-16</td>
-            <td>3968</td>
-            <td>866</td>
-            <td>3755</td>
-            <td>847</td>
-          </tr>
-          <tr>
-            <td>Marine Corps Marathon</td>
-            <td class='current'>10-25</td>
-            <td>10-30</td>
-            <td>19808</td>
-            <td>953</td>
-            <td>23342</td>
-            <td>1041</td>
-          </tr>
-          <tr>
-            <td>Indianapolis Monumental Marathon</td>
-            <td class='current'>11-07</td>
-            <td>11-05</td>
-            <td>3735</td>
-            <td>778</td>
-            <td>4026</td>
-            <td>668</td>
-          </tr>
-          <tr>
-            <td>New York City Marathon</td>
-            <td class='current'>11-01</td>
-            <td>11-06</td>
-            <td>50398</td>
-            <td>4170</td>
-            <td>49462</td>
-            <td>4246</td>
-          </tr>
-          <tr>
-            <td>Richmond Marathon</td>
-            <td class='current'>11-14</td>
-            <td>11-12</td>
-            <td>5118</td>
-            <td>593</td>
-            <td>4524</td>
-            <td>516</td>
-          </tr>
-          <tr>
-            <td>Philadelphia Marathon</td>
-            <td class='current'>11-22</td>
-            <td>11-20</td>
-            <td>13219</td>
-            <td>4356</td>
-            <td>11538</td>
-            <td>3761</td>
-          </tr>
-          <tr>
-            <td>California International Marathon</td>
-            <td class='current'>12-06</td>
-            <td>12-04</td>
-            <td>5769</td>
-            <td>1422</td>
-            <td>5627</td>
-            <td>1362</td>
-          </tr>
-          <tr>
-            <td>Houston Marathon</td>
-            <td>01-19</td>
-            <td class='current'>01-17</td>
-            <td>7004</td>
-            <td>822</td>
-            <td>7802</td>
-            <td>1039</td>
-          </tr>
-          <tr>
-            <td>Boston Marathon</td>
-            <td>04-20</td>
-            <td class='current'>04-18</td>
-            <td>26675</td>
-            <td>13840</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Eugene Marathon</td>
-            <td>05-09</td>
-            <td class='current'>05-01</td>
-            <td>1477</td>
-            <td>345</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Bayshore Marathon</td>
-            <td>05-23</td>
-            <td class='current'>05-28</td>
-            <td>2043</td>
-            <td>466</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Mountains 2 Beach Marathon</td>
-            <td>05-24</td>
-            <td class='current'>05-29</td>
-            <td>1602</td>
-            <td>540</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Ottawa Marathon</td>
-            <td>05-24</td>
-            <td class='current'>05-29</td>
-            <td>4492</td>
-            <td>1092</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Vermont City Marathon</td>
-            <td>05-24</td>
-            <td class='current'>05-29</td>
-            <td>2620</td>
-            <td>582</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Grandma's Marathon</td>
-            <td>06-20</td>
-            <td class='current'>06-18</td>
-            <td>6077</td>
-            <td>1236</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Santa Rosa Marathon</td>
-            <td>08-23</td>
-            <td class='current'>08-28</td>
-            <td>1440</td>
-            <td>384</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Lehigh Valley Marathon</td>
-            <td>09-06</td>
-            <td class='current'>09-11</td>
-            <td>943</td>
-            <td>237</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Big Cottonwood Marathon</td>
-            <td>09-12</td>
-            <td class='current'>09-10</td>
-            <td>1282</td>
-            <td>366</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Erie Marathon</td>
-            <td>09-13</td>
-            <td class='current'>09-11</td>
-            <td>1516</td>
-            <td>548</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>Total</th>
-            <th></th>
-            <th></th>
-            <th>259056</th>
-            <th>47687</th>
-            <th>208306</th>
-            <th>27310</th>
-          </tr>
-        </tbody>
-      </table>
-      <!--
+          <p>
+            These are the top 25 marathons contributing runners to Boston in 2015 <i>or</i> 2016 (27 total).
+            Those in <span style='color:red'>red</span> are qualifiers for the 2017 Boston marathon.
+          </p>
+
+          <table style="margin:auto">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>2015 Date</th>
+                <th>2016 Date</th>
+                <th>Q2016 Finishers</th>
+                <th>Q2016 Qualifiers</th>
+                <th>Q2017 Finishers</th>
+                <th>Q2017 Qualifiers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Berlin Marathon</td>
+                <td class='current'>09-27</td>
+                <td>09-25</td>
+                <td>28943</td>
+                <td>5120</td>
+                <td>32929</td>
+                <td>5566</td>
+              </tr>
+              <tr>
+                <td>St. George Marathon</td>
+                <td class='current'>10-03</td>
+                <td>10-04</td>
+                <td>5824</td>
+                <td>1173</td>
+                <td>5481</td>
+                <td>1087</td>
+              </tr>
+              <tr>
+                <td>Portland Marathon</td>
+                <td class='current'>10-04</td>
+                <td>10-09</td>
+                <td>6431</td>
+                <td>495</td>
+                <td>5716</td>
+                <td>483</td>
+              </tr>
+              <tr>
+                <td>Twin Cities Marathon</td>
+                <td class='current'>10-04</td>
+                <td>10-09</td>
+                <td>8853</td>
+                <td>1171</td>
+                <td>8541</td>
+                <td>1063</td>
+              </tr>
+              <tr>
+                <td>Chicago Marathon</td>
+                <td class='current'>10-11</td>
+                <td>10-09</td>
+                <td>40599</td>
+                <td>4457</td>
+                <td>37445</td>
+                <td>4099</td>
+              </tr>
+              <tr>
+                <td>Baystate Marathon</td>
+                <td class='current'>10-18</td>
+                <td>10-16</td>
+                <td>1575</td>
+                <td>472</td>
+                <td>1446</td>
+                <td>430</td>
+              </tr>
+              <tr>
+                <td>Columbus Marathon</td>
+                <td class='current'>10-18</td>
+                <td>10-16</td>
+                <td>5461</td>
+                <td>697</td>
+                <td>4443</td>
+                <td>592</td>
+              </tr>
+              <tr>
+                <td>Toronto Waterfront Marathon</td>
+                <td class='current'>10-18</td>
+                <td>10-16</td>
+                <td>3968</td>
+                <td>866</td>
+                <td>3755</td>
+                <td>847</td>
+              </tr>
+              <tr>
+                <td>Marine Corps Marathon</td>
+                <td class='current'>10-25</td>
+                <td>10-30</td>
+                <td>19808</td>
+                <td>953</td>
+                <td>23342</td>
+                <td>1041</td>
+              </tr>
+              <tr>
+                <td>Indianapolis Monumental Marathon</td>
+                <td class='current'>11-07</td>
+                <td>11-05</td>
+                <td>3735</td>
+                <td>778</td>
+                <td>4026</td>
+                <td>668</td>
+              </tr>
+              <tr>
+                <td>New York City Marathon</td>
+                <td class='current'>11-01</td>
+                <td>11-06</td>
+                <td>50398</td>
+                <td>4170</td>
+                <td>49462</td>
+                <td>4246</td>
+              </tr>
+              <tr>
+                <td>Richmond Marathon</td>
+                <td class='current'>11-14</td>
+                <td>11-12</td>
+                <td>5118</td>
+                <td>593</td>
+                <td>4524</td>
+                <td>516</td>
+              </tr>
+              <tr>
+                <td>Philadelphia Marathon</td>
+                <td class='current'>11-22</td>
+                <td>11-20</td>
+                <td>13219</td>
+                <td>4356</td>
+                <td>11538</td>
+                <td>3761</td>
+              </tr>
+              <tr>
+                <td>California International Marathon</td>
+                <td class='current'>12-06</td>
+                <td>12-04</td>
+                <td>5769</td>
+                <td>1422</td>
+                <td>5627</td>
+                <td>1362</td>
+              </tr>
+              <tr>
+                <td>Houston Marathon</td>
+                <td>01-19</td>
+                <td class='current'>01-17</td>
+                <td>7004</td>
+                <td>822</td>
+                <td>7802</td>
+                <td>1039</td>
+              </tr>
+              <tr>
+                <td>Boston Marathon</td>
+                <td>04-20</td>
+                <td class='current'>04-18</td>
+                <td>26675</td>
+                <td>13840</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Eugene Marathon</td>
+                <td>05-09</td>
+                <td class='current'>05-01</td>
+                <td>1477</td>
+                <td>345</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Bayshore Marathon</td>
+                <td>05-23</td>
+                <td class='current'>05-28</td>
+                <td>2043</td>
+                <td>466</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Mountains 2 Beach Marathon</td>
+                <td>05-24</td>
+                <td class='current'>05-29</td>
+                <td>1602</td>
+                <td>540</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Ottawa Marathon</td>
+                <td>05-24</td>
+                <td class='current'>05-29</td>
+                <td>4492</td>
+                <td>1092</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vermont City Marathon</td>
+                <td>05-24</td>
+                <td class='current'>05-29</td>
+                <td>2620</td>
+                <td>582</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Grandma's Marathon</td>
+                <td>06-20</td>
+                <td class='current'>06-18</td>
+                <td>6077</td>
+                <td>1236</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Santa Rosa Marathon</td>
+                <td>08-23</td>
+                <td class='current'>08-28</td>
+                <td>1440</td>
+                <td>384</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lehigh Valley Marathon</td>
+                <td>09-06</td>
+                <td class='current'>09-11</td>
+                <td>943</td>
+                <td>237</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Big Cottonwood Marathon</td>
+                <td>09-12</td>
+                <td class='current'>09-10</td>
+                <td>1282</td>
+                <td>366</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Erie Marathon</td>
+                <td>09-13</td>
+                <td class='current'>09-11</td>
+                <td>1516</td>
+                <td>548</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th>259056</th>
+                <th>47687</th>
+                <th>208306</th>
+                <th>27310</th>
+              </tr>
+            </tbody>
+          </table>
+          <!--
   Event                                   2015         2016
   ----------------------------------- ------------ ------------
   Berlin Marathon                    |  9/27/2015 |  9/25/2016
@@ -371,182 +415,188 @@
   Big Cottonwood Marathon              9/12/2015  |  9/10/2016
   Erie Marathon                        9/13/2015  |  9/11/2016
                                                    -----------
-      -->
+          -->
 
 
-      <p>
-        I built an estimate of the proportion of qualifiers from each race that actually runs Boston by comparing names and
-        ages with the published Boston results. This matching is not perfect, but it's close. I use a running average of these
-        weights over the past 2 years to estimate the "recidivism" from a particular qualifier to Boston. This explains why
-        Berlin is an outlier - because 2-4% of qualifiers go run Boston, compared to ~30% in North America. Each qualifier is
-        given a weight according to the likelihood of their registering for Boston, then a number of people is chosen, accounting
-        for changes in the field size and total number of qualifiers. Here's all the data:
-      </p>
+          <p>
+            I built an estimate of the proportion of qualifiers from each race that actually runs Boston by comparing names and
+            ages with the published Boston results. This matching is not perfect, but it's close. I use a running average of these
+            weights over the past 2 years to estimate the "recidivism" from a particular qualifier to Boston. This explains why
+            Berlin is an outlier - because 2-4% of qualifiers go run Boston, compared to ~30% in North America. Each qualifier is
+            given a weight according to the likelihood of their registering for Boston, then a number of people is chosen, accounting
+            for changes in the field size and total number of qualifiers. Here's all the data:
+          </p>
 
-      <h4>Recidivism - fraction of qualifiers who go on to <i>run</i> Boston</h4>
-      <table>
-        <thead>
-          <tr>
-            <th>Race</th>
-            <th>Q2012</th>
-            <th>Q2013</th>
-            <th>Q2014</th>
-            <th>Q2015</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>bayshore</td><td>0.3435</td><td>0.3527</td><td>0.4685</td><td>0.3981</td></tr>
-          <tr><td>baystate</td><td>0.4599</td><td>0.4784</td><td>0.5474</td><td>0.5344</td></tr>
-          <tr><td>bigcottonwood</td><td></td><td>0.3778</td><td>0.5253</td><td>0.3043</td></tr>
-          <tr><td>berlin</td><td>0.0241</td><td>0.0360</td><td>0.0457</td><td style='color:red'>0.0401</td></tr>
-          <tr><td>boston</td><td>0.3771</td><td>0.3942</td><td>0.5071</td><td>0.3632</td></tr>
-          <tr><td>california_intl</td><td>0.2510</td><td>0.3007</td><td>0.3840</td><td>0.3728</td></tr>
-          <tr><td>chicago</td><td>0.2002</td><td>0.2875</td><td>0.3467</td><td>0.3432</td></tr>
-          <tr><td>columbus</td><td>0.2535</td><td>0.3214</td><td>0.4081</td><td>0.3533</td></tr>
-          <tr><td>erie</td><td>0.4953</td><td>0.4737</td><td>0.5444</td><td>0.5794</td></tr>
-          <tr><td>eugene</td><td>0.3062</td><td>0.3427</td><td>0.3837</td><td>0.3993</td></tr>
-          <tr><td>grandmas</td><td>0.3139</td><td>0.3276</td><td>0.4286</td><td>0.4119</td></tr>
-          <tr><td>houston</td><td>0.2294</td><td>0.3122</td><td>0.3865</td><td>0.3610</td></tr>
-          <tr><td>indianapolis</td><td>0.2471</td><td>0.3368</td><td>0.3947</td><td>0.3710</td></tr>
-          <tr><td>lehigh</td><td>0.6108</td><td>0.6015</td><td>0.6626</td><td>0.6486</td></tr>
-          <tr><td>mcm</td><td>0.2873</td><td>0.3486</td><td>0.3404</td><td>0.3490</td></tr>
-          <tr><td>mountains2beach</td><td>0.4500</td><td>0.3664</td><td>0.5533</td><td>0.5437</td></tr>
-          <tr><td>nyc</td><td>0.1873</td><td>0.2010</td><td></td><td>0.2410</td></tr>
-          <tr><td>ottawa</td><td>0.3452</td><td>0.3477</td><td>0.3424</td><td>0.3672</td></tr>
-          <tr><td>philadelphia</td><td>0.1192</td><td>0.1164</td><td>0.1767</td><td>0.1492</td></tr>
-          <tr><td>portland</td><td>0.1693</td><td>0.2755</td><td>0.3206</td><td>0.3116</td></tr>
-          <tr><td>richmond</td><td>0.3130</td><td>0.3274</td><td>0.3981</td><td>0.3584</td></tr>
-          <tr><td>santarosa</td><td>0.6381</td><td>0.5829</td><td>0.5282</td><td>0.5270</td></tr>
-          <tr><td>stgeorge</td><td>0.2042</td><td>0.2355</td><td>0.3262</td><td>0.3361</td></tr>
-          <tr><td>steamtown</td><td>0.3678</td><td>0.3867</td><td>0.4619</td><td>0.4554</td></tr>
-          <tr><td>toronto</td><td>0.2440</td><td>0.2415</td><td>0.2659</td><td>0.3329</td></tr>
-          <tr><td>twincities</td><td>0.1840</td><td>0.2444</td><td>0.2997</td><td>0.2858</td></tr>
-          <tr><td>vermont</td><td>0.1893</td><td>0.2936</td><td>0.3699</td><td>0.3125</td></tr>
-          <tr><th>Total</th><th>0.2308</th><th>0.2312</th><th>0.3419</th><th>0.2881</th></tr>
-        </tbody>
-      </table>
+          <h4>Recidivism - fraction of qualifiers who go on to <i>run</i> Boston</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Race</th>
+                <th>Q2012</th>
+                <th>Q2013</th>
+                <th>Q2014</th>
+                <th>Q2015</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>bayshore</td><td>0.3435</td><td>0.3527</td><td>0.4685</td><td>0.3981</td></tr>
+              <tr><td>baystate</td><td>0.4599</td><td>0.4784</td><td>0.5474</td><td>0.5344</td></tr>
+              <tr><td>bigcottonwood</td><td></td><td>0.3778</td><td>0.5253</td><td>0.3043</td></tr>
+              <tr><td>berlin</td><td>0.0241</td><td>0.0360</td><td>0.0457</td><td style='color:red'>0.0401</td></tr>
+              <tr><td>boston</td><td>0.3771</td><td>0.3942</td><td>0.5071</td><td>0.3632</td></tr>
+              <tr><td>california_intl</td><td>0.2510</td><td>0.3007</td><td>0.3840</td><td>0.3728</td></tr>
+              <tr><td>chicago</td><td>0.2002</td><td>0.2875</td><td>0.3467</td><td>0.3432</td></tr>
+              <tr><td>columbus</td><td>0.2535</td><td>0.3214</td><td>0.4081</td><td>0.3533</td></tr>
+              <tr><td>erie</td><td>0.4953</td><td>0.4737</td><td>0.5444</td><td>0.5794</td></tr>
+              <tr><td>eugene</td><td>0.3062</td><td>0.3427</td><td>0.3837</td><td>0.3993</td></tr>
+              <tr><td>grandmas</td><td>0.3139</td><td>0.3276</td><td>0.4286</td><td>0.4119</td></tr>
+              <tr><td>houston</td><td>0.2294</td><td>0.3122</td><td>0.3865</td><td>0.3610</td></tr>
+              <tr><td>indianapolis</td><td>0.2471</td><td>0.3368</td><td>0.3947</td><td>0.3710</td></tr>
+              <tr><td>lehigh</td><td>0.6108</td><td>0.6015</td><td>0.6626</td><td>0.6486</td></tr>
+              <tr><td>mcm</td><td>0.2873</td><td>0.3486</td><td>0.3404</td><td>0.3490</td></tr>
+              <tr><td>mountains2beach</td><td>0.4500</td><td>0.3664</td><td>0.5533</td><td>0.5437</td></tr>
+              <tr><td>nyc</td><td>0.1873</td><td>0.2010</td><td></td><td>0.2410</td></tr>
+              <tr><td>ottawa</td><td>0.3452</td><td>0.3477</td><td>0.3424</td><td>0.3672</td></tr>
+              <tr><td>philadelphia</td><td>0.1192</td><td>0.1164</td><td>0.1767</td><td>0.1492</td></tr>
+              <tr><td>portland</td><td>0.1693</td><td>0.2755</td><td>0.3206</td><td>0.3116</td></tr>
+              <tr><td>richmond</td><td>0.3130</td><td>0.3274</td><td>0.3981</td><td>0.3584</td></tr>
+              <tr><td>santarosa</td><td>0.6381</td><td>0.5829</td><td>0.5282</td><td>0.5270</td></tr>
+              <tr><td>stgeorge</td><td>0.2042</td><td>0.2355</td><td>0.3262</td><td>0.3361</td></tr>
+              <tr><td>steamtown</td><td>0.3678</td><td>0.3867</td><td>0.4619</td><td>0.4554</td></tr>
+              <tr><td>toronto</td><td>0.2440</td><td>0.2415</td><td>0.2659</td><td>0.3329</td></tr>
+              <tr><td>twincities</td><td>0.1840</td><td>0.2444</td><td>0.2997</td><td>0.2858</td></tr>
+              <tr><td>vermont</td><td>0.1893</td><td>0.2936</td><td>0.3699</td><td>0.3125</td></tr>
+              <tr><th>Total</th><th>0.2308</th><th>0.2312</th><th>0.3419</th><th>0.2881</th></tr>
+            </tbody>
+          </table>
 
-      <p>
-        This makes the reason Berlin is an "outlier" very clear. Also, it shows that there is reason to doubt
-        another one of the basic assumptions in the simple prediction model - namely that the "desirability"
-        of running Boston is constant. These numbers are further confounded by changes in the Boston field
-        size over these years. Consider the following:
-      </p>
+          <p>
+            This makes the reason Berlin is an "outlier" very clear. Also, it shows that there is reason to doubt
+            another one of the basic assumptions in the simple prediction model - namely that the "desirability"
+            of running Boston is constant. These numbers are further confounded by changes in the Boston field
+            size over these years. Consider the following:
+          </p>
 
-      <table>
-        <thead>
-          <tr><th></th><th>Q2012</th><th>Q2013</th><th>Q2014</th><th>Q2015</th><th>Q2016</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Field Size (FS)</td><td>27,000</td><td>27,000</td><td>36,000</td><td>30,000</td><td>30,000</td></tr>
-          <tr><td>Qualifiers (Q)</td><td>35,822</td><td>32,695</td><td>39,833</td><td>47,598</td><td>47,687</td></tr>
-          <tr><td>Recidivism (R)</td><td>0.2308</td><td>0.2312</td><td>0.3419</td><td>0.2881</td></tr>
-          <tr><td>Runners (Q x R)</td><td>8,269</td><td>7,559</td><td>13,617</td><td>13,711</td><td></td></tr>
-          <tr><td>% of Field [(Q x R) / FS]</td><td>0.306</td><td>0.280</td><td>0.378</td><td>0.457</td><td></td></tr>
-          <tr><td>Cutoff</td><td>74</td><td>0</td><td>98</td><td>62</td><td>147</td></tr>
-        </tbody>
-      </table>
+          <table>
+            <thead>
+              <tr><th></th><th>Q2012</th><th>Q2013</th><th>Q2014</th><th>Q2015</th><th>Q2016</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Field Size (FS)</td><td>27,000</td><td>27,000</td><td>36,000</td><td>30,000</td><td>30,000</td></tr>
+              <tr><td>Qualifiers (Q)</td><td>35,822</td><td>32,695</td><td>39,833</td><td>47,598</td><td>47,687</td></tr>
+              <tr><td>Recidivism (R)</td><td>0.2308</td><td>0.2312</td><td>0.3419</td><td>0.2881</td></tr>
+              <tr><td>Runners (Q x R)</td><td>8,269</td><td>7,559</td><td>13,617</td><td>13,711</td><td></td></tr>
+              <tr><td>% of Field [(Q x R) / FS]</td><td>0.306</td><td>0.280</td><td>0.378</td><td>0.457</td><td></td></tr>
+              <tr><td>Cutoff</td><td>74</td><td>0</td><td>98</td><td>62</td><td>147</td></tr>
+            </tbody>
+          </table>
 
-      <p>
-        The % of the field from these races varies with the total number of qualifiers from these races.
-        The chart below shows this relationship.
-      </p>
+          <p>
+            The % of the field from these races varies with the total number of qualifiers from these races.
+            The chart below shows this relationship.
+          </p>
 
-      <div id="chart0" style='width:600px; height:400px'></div>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
+          <div id="chart0" style='width:600px; height:400px'></div>
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
 
-          // ------- Chart 0 -------
-          var data = google.visualization.arrayToDataTable([
-            ['Qualifiers', '% of Field'],
-            [ 35822, 30.6], //2012
-            [ 32695, 28.0], //2013
-            [ 39833, 37.8], //2014
-            [ 47598, 45.7], //2015
-            // y = x/842 - 10.8
-          ]);
+              // ------- Chart 0 -------
+              var data = google.visualization.arrayToDataTable([
+                ['Qualifiers', '% of Field'],
+                [ 35822, 30.6], //2012
+                [ 32695, 28.0], //2013
+                [ 39833, 37.8], //2014
+                [ 47598, 45.7], //2015
+                // y = x/842 - 10.8
+              ]);
 
-          var options = {
-            title: '% of Field by Qualifiers',
-            hAxis: {title: 'Qualifiers', minValue: 30000, maxValue: 50000},
-            vAxis: {
-              title: '% of Field',
-              viewWindowMode:'explicit',
-              viewWindow:{
-                max:50,
-                min:20
-              }
-            },
-            legend: 'none'
-          };
+              var options = {
+                title: '% of Field by Qualifiers',
+                hAxis: {title: 'Qualifiers', minValue: 30000, maxValue: 50000},
+                vAxis: {
+                  title: '% of Field',
+                  viewWindowMode:'explicit',
+                  viewWindow:{
+                    max:50,
+                    min:20
+                  }
+                },
+                legend: 'none'
+              };
 
-          var chart = new google.visualization.ScatterChart(document.getElementById('chart0'));
+              var chart = new google.visualization.ScatterChart(document.getElementById('chart0'));
 
-          chart.draw(data, options);
-
-
-          // ------- Chart 1 -------
-          var data = google.visualization.arrayToDataTable([
-            ['Qualifiers', '% of Field'],
-            [ 23179, 3710/27000*100], //2012
-            [ 25445, 4929/27000*100], //2013
-            [ 22970, 5533/36000*100], //2014
-            [ 29184, 6719/30000*100], //2015
-            // y = x/903 - 10.1
-          ]);
-
-          var options = {
-            title: '% of Field by Qualifiers',
-            hAxis: {title: 'Qualifiers', minValue: 20000, maxValue: 30000},
-            vAxis: {
-              title: '% of Field',
-              viewWindowMode:'explicit',
-              viewWindow:{
-                max:30,
-                min:0
-              }
-            },
-            legend: 'none'
-          };
-
-          var chart = new google.visualization.ScatterChart(document.getElementById('chart1'));
-
-          chart.draw(data, options);
-        }
-      </script>
-
-      <p>
-        From this, we can derive a prediction of the % contribution to Boston from the raw # of qualifiers.
-        <pre>(% of field) = (qualifiers) / 842 - 10.8</pre>
-        For 2016 (since we don't know the actual % of field yet), we predict
-        <pre>47,687 / 842 - 10.8 = 45.8</pre> (percent of the field). The field size for 2016 is 30,000, so
-        13,740 qualifiers should come from these races. So if we give each qualifier a weight equal to the
-        average recidivism from that race for the past 2 years, then add these values as we go down the list
-        of qualifiers in decreasing order of qualification margin, when we hit 13,740 the margin is 146
-        seconds. That's really really close to the actual cutoff of 147 seconds. So this is the model we'll
-        work with.
-      </p>
-
-      <h3>Q2017 Prediction</h3>
-      <p>
-        The above model works well when we have data from all of these qualifying races, but does not scale
-        down to only part of the field that we have at the moment. If we repeat the qualifiers x field plot
-        above including only those races already run this year, it looks like so:
-      </p>
-
-      <div id="chart1" style='width:600px; height:400px'></div>
-
-      <p>
-        <pre>(% of field) = (qualifiers) / 903 - 10.1</pre>
-        This indicates that 19.21% of the 2017 Boston field is described by the qualifiers already run.
-        Using the historical recidivism rates, 5761 of 26463 qualifiers from these races will run, meeting
-        a <span style='color:red'>cutoff of 129 seconds, or 2:09</span>.
-      </p>
+              chart.draw(data, options);
 
 
+              // ------- Chart 1 -------
+              var data = google.visualization.arrayToDataTable([
+                ['Qualifiers', '% of Field'],
+                [ 23179, 3710/27000*100], //2012
+                [ 25445, 4929/27000*100], //2013
+                [ 22970, 5533/36000*100], //2014
+                [ 29184, 6719/30000*100], //2015
+                // y = x/903 - 10.1
+              ]);
+
+              var options = {
+                title: '% of Field by Qualifiers',
+                hAxis: {title: 'Qualifiers', minValue: 20000, maxValue: 30000},
+                vAxis: {
+                  title: '% of Field',
+                  viewWindowMode:'explicit',
+                  viewWindow:{
+                    max:30,
+                    min:0
+                  }
+                },
+                legend: 'none'
+              };
+
+              var chart = new google.visualization.ScatterChart(document.getElementById('chart1'));
+
+              chart.draw(data, options);
+            }
+          </script>
+
+          <p>
+            From this, we can derive a prediction of the % contribution to Boston from the raw # of qualifiers.
+            <pre>(% of field) = (qualifiers) / 842 - 10.8</pre>
+            For 2016 (since we don't know the actual % of field yet), we predict
+            <pre>47,687 / 842 - 10.8 = 45.8</pre> (percent of the field). The field size for 2016 is 30,000, so
+            13,740 qualifiers should come from these races. So if we give each qualifier a weight equal to the
+            average recidivism from that race for the past 2 years, then add these values as we go down the list
+            of qualifiers in decreasing order of qualification margin, when we hit 13,740 the margin is 146
+            seconds. That's really really close to the actual cutoff of 147 seconds. So this is the model we'll
+            work with.
+          </p>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="header">
+          Q2017 Prediction
+        </div>
+        <div class="content">
+          <p>
+            The above model works well when we have data from all of these qualifying races, but does not scale
+            down to only part of the field that we have at the moment. If we repeat the qualifiers x field plot
+            above including only those races already run this year, it looks like so:
+          </p>
+
+          <div id="chart1" style='width:600px; height:400px'></div>
+
+          <p>
+            <pre>(% of field) = (qualifiers) / 903 - 10.1</pre>
+            This indicates that 19.21% of the 2017 Boston field is described by the qualifiers already run.
+            Using the historical recidivism rates, 5761 of 26463 qualifiers from these races will run, meeting
+            a <span style='color:red'>cutoff of 129 seconds, or 2:09</span>.
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
