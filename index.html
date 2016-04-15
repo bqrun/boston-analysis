@@ -80,31 +80,48 @@
             See <a href="http://boston-qualifier-stats.blogspot.com/">http://boston-qualifier-stats.blogspot.com/</a> and <a href="http://www.namethatbostonmarathoncutoff.com/">http://www.namethatbostonmarathoncutoff.com/</a>.
           </p>
           <p>
-            First, I tried to reproduce these analyses as closely as possible.
-            There are obviously differences in the minutia of scraping, parsing, what to do with people who only have an age
-            group, etc, that introduce differences. Anyhow, this is what I got:
+            First, I tried to reproduce these analyses as closely as possible. The methodology is described in detail <a href="http://boston-qualifier-stats.blogspot.com/p/objective-and-methodology.html">here</a>.
+            <br/>
+            The basic idea is as follow:
+            <ol>
+              <li>Get all the finisher data for the top 25 "feeder" marathons for the past 2 years</li>
+              <li>Count how many finishers from last year met the designated cutoff (2015: 62s, 2016: 147s)</li>
+              <li>Call this number <i>n</i></li>
+              <li>For the current year, order finishers in decreasing order by the margin (in seconds) with which they qualified</li>
+              <li>Count down to the finisher with the <i>n</i>th largest margin</li>
+              <li>This person's margin is the estimated cutoff</li>
+            </ol>
+            There are a number of assumptions for this model to be accurate, including all years must have equivalent
+            (1) Boston field size,
+            (2) Total number of qualifiers,
+            (3) Contribution to Boston from <i>these</i> feeder races,
+            and (4) Likelihood of any given qualifier registering for Boston.
+            <br/>
+            Anyhow, this is what I got:
             <br/>
             <h4>Q2016 Analysis</h4>
             <ul>
               <li>2015 cutoff: 62 seconds</li>
               <li>For 2015, 45,237 people met the cutoff.</li>
-              <li>For 2016, 45,369 people met the same cutoff.</li>
+              <!--<li>For 2016, 45,369 people met the same cutoff.</li>-->
               <li>For 2016, 45,237 people met a cutoff of 65 seconds.</li>
               <li>Actual 2016 cutoff: 147 seconds</li>
             </ul>
-            This estimate of 65 seconds is not very close to the <a href="http://boston-qualifier-stats.blogspot.com/2015/09/final-projected-boston-marathon-2016.html">previous estimate</a>
-            of 91 seconds. The added caveat was that without the "outlier", Berlin, the prediction was 130 seconds.
-            It's not clear why my estimate using the same method is so different.
+            This estimate of 65 seconds is (1) not very close to the actual cutoff of 147 seconds and (2) not very close to
+            the <a href="http://boston-qualifier-stats.blogspot.com/2015/09/final-projected-boston-marathon-2016.html">original posted estimate</a>
+            of 91 seconds. In this previous analysis, she added the caveat that without the "outlier", Berlin, the prediction was 130 seconds.
+            It's not clear why my estimate using the same method is so different. There are obviously differences in the minutia
+            of scraping, parsing, what to do with some types of missing data, etc, that introduced a lot of variation. 
             <br/>
             <h4>Q2017 Analysis</h4>
             <ul>
               <li>2016 cutoff: 147 seconds</li>
               <li>For 2016, 24,784 people met the cutoff.</li>
-              <li>For 2017, 24,311 people met the same cutoff.</li>
+              <!--<li>For 2017, 24,311 people met the same cutoff.</li>-->
               <li>For 2017, 24,784 people met a cutoff of 122 seconds.</li>
             </ul>
-            This is largely consistent with the <a href="http://www.namethatbostonmarathoncutoff.com/2016/03/2015-philadelphia-marathon-cutoff-update.html">current estimate</a>
-            of 117 seconds.
+            My estimate here is largely consistent with the current prediction of 117 seconds from the
+            <a href="http://www.namethatbostonmarathoncutoff.com/2016/03/2015-philadelphia-marathon-cutoff-update.html">existing analysis</a>.
           </p>
         </div>
       </div>
