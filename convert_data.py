@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
     # get boston results for this year
     boston = None
-    if int(year) < 2016:
+    if int(year) < 2017:
       boston = pd.read_csv("results/boston/boston_%s.csv" % year)
       add_age_group(boston)
 
