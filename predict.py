@@ -29,13 +29,16 @@ use_races = np.array(range(len(RACES)))
 
 
 def main():
+  display_registration(data, margin_field="max_margin", display_format="html")
+  margin_histogram(data, 2012, 2016)
   for year in range(2012, 2018):
     print
     print "Qualifying year %i" % year
     display_year_data(data, year)
     if year > 2012:
       simple_analysis(data, year, CUTOFFS[year-1], margin_field='margin')
-      stage1_analysis(data, year, CUTOFFS[year-1], margin_field='margin')
+      stage1_analysis(data, year, CUTOFFS[year-1], margin_field='max_margin')
+      stage2_analysis(data, year, CUTOFFS[year-1], margin_field='max_margin')
 
 '''
   yeardata = np.sort(data[data["year"] == year], order=margin_field)[::-1]
@@ -172,6 +175,97 @@ def display_year_data(data, year, races=RACES, margin_field='margin', display_fo
     print "</tbody></table>"
 
 
+def display_registration(data, races=RACES, margin_field='margin', display_format="tab"):
+  if display_format == "tab":
+    begin = ""
+    delimiter = "\t"
+    end = ""
+  elif display_format == "html":
+    print "<table><thead><tr><th>Race</th><th>Q2012</th><th>Q2013</th><th>Q2014</th><th>Q2015</th><th>Q2016</th></tr></thead><tbody>"
+    begin = "<tr><td>"
+    delimiter = "</td><td>"
+    end = "</td></tr>"
+
+  yeardata = [np.sort(data[data["year"] == year], order=margin_field)[::-1] for year in range(2012, 2017)]
+
+  for r in [RACES.index(race) for race in races]:
+    print begin, RACES[r], delimiter,
+    for year in range(2012, 2017):
+      racedata = yeardata[year-2012][yeardata[year-2012]["race"] == r]
+      met_cutoff = racedata[racedata[margin_field] >= CUTOFFS[year]].shape[0]
+      ran = racedata[racedata["ran"] == 1].shape[0]
+      print "%.4f" % ((float(ran) / met_cutoff) if met_cutoff > 0 else 0), delimiter,
+    print end
+
+  reg_rate = []
+  field_size = []
+  qualifiers = []
+  met_cutoff = []
+  cutoff = []
+
+  delimiter = delimiter.replace('td', 'th')
+  for year in range(2012, 2017):
+    yeardata = data[data["year"] == year]
+    qual = yeardata[yeardata[margin_field] >= 0].shape[0]
+    met = yeardata[yeardata[margin_field] >= CUTOFFS[year]].shape[0]
+    ran = yeardata[yeardata["ran"] == 1].shape[0]
+    reg_rate.append(float(ran) / met)
+    field_size.append(FIELD_SIZES[year])
+    cutoff.append(CUTOFFS[year])
+    qualifiers.append(qual)
+    met_cutoff.append(met)
+
+  print begin.replace('td', 'th'), "Total", delimiter,
+  for i in xrange(len(reg_rate)):
+    print "%.4f" % (reg_rate[i]), delimiter,
+  print end
+
+  if display_format == "html":
+    print "</tbody></table>"
+
+
+  # more global stats
+  stats = {
+      "Field Size (FS)": ["%i" % f for f in field_size],
+      "Qualifiers (Q)": ["%i" % f for f in qualifiers],
+      "Met Cutoff (M)": ["%i" % f for f in met_cutoff],
+      "Registration Rate (R)": ["%.4f" % f for f in reg_rate],
+      "Expected Registrants (Q x R)": ["%i" % (qualifiers[i] * reg_rate[i]) for i in xrange(len(qualifiers))],
+      "Ran Boston (M x R)": ["%i" % (met_cutoff[i] * reg_rate[i]) for i in xrange(len(met_cutoff))],
+      "% of Field [(M x R) / FS]": ["%.2f%%" % (met_cutoff[i] * reg_rate[i] / field_size[i] * 100) for i in xrange(len(met_cutoff))],
+      "Cutoff": ["%i" % f for f in cutoff],
+  }
+
+  print
+  if display_format == "html":
+    delimiter = delimiter.replace('th', 'td')
+    print "<table><thead><tr><th>Race</th><th>Q2012</th><th>Q2013</th><th>Q2014</th><th>Q2015</th><th>Q2016</th></tr></thead><tbody>"
+
+  for key in stats.keys():
+    print begin, key, delimiter,
+    for i in xrange(len(stats[key])):
+      print stats[key][i], delimiter,
+    print end
+
+  if display_format == "html":
+    print "</tbody></table>"
+
+
+  # reg rate by race (google chart data)
+  print "["
+  print "  ['Year', " + ','.join("'%s'" % race for race in races) + "],"
+  for year in range(2012, 2017):
+    yeardata = data[data["year"] == year]
+    print "  [%i, " % year,
+    for r in [RACES.index(race) for race in races]:
+      racedata = yeardata[yeardata["race"] == r]
+      met_cutoff = racedata[racedata[margin_field] >= CUTOFFS[year]].shape[0]
+      ran = racedata[racedata["ran"] == 1].shape[0]
+      print ("%.4f, " % (float(ran) / met_cutoff)) if met_cutoff > 0 else "null, ",
+    print "],"
+  print "]"
+
+
 def margin_histogram(data, start_year, end_year, margin_field='margin'):
   margin_hist = []
   for year in range(start_year, end_year+1):
@@ -181,7 +275,7 @@ def margin_histogram(data, start_year, end_year, margin_field='margin'):
     for a in yeardata:
       if a[margin_field] > 10000 or a[margin_field] < 0:
         continue
-      margin_distr[int(a[margin_field])/10] += 1.0/n_qualifiers
+      margin_distr[int(a[margin_field])/10] += 1.0 #/n_qualifiers
     if len(margin_hist) == 0:
       for i in xrange(len(margin_distr)):
         margin_hist.append([i*10, margin_distr[i]])
@@ -189,9 +283,9 @@ def margin_histogram(data, start_year, end_year, margin_field='margin'):
       for i in xrange(len(margin_distr)):
         margin_hist[i].append(margin_distr[i])
   print "["
-  print "  ['Margin'," + ','.join("'%i'" % y for y in range(start_year, end_year+1)) + "]"
-  for c in margin_hist:
-    print "  " + str(c)
+  print "  ['Margin'," + ','.join("'%i'" % y for y in range(start_year, end_year+1)) + "],"
+  for c in margin_hist[:401]:
+    print "  [" + ','.join(["%i" % a for a in c]) + "],"
   print "]"
 
 
@@ -229,6 +323,39 @@ def stage1_analysis(data, year, last_cutoff, margin_field='margin'):
   weights = []
   for r in xrange(len(RACES)):
     racedata = lastyeardata[lastyeardata["race"] == r]
+    n_ran = racedata[racedata["ran"] == 1].shape[0]
+    n_met_cutoff = racedata[racedata[margin_field] >= last_cutoff].shape[0]
+    weights.append((float(n_ran) / n_met_cutoff) if n_met_cutoff > 0 else 0)
+
+  cumulative_weight = 0
+  for i in xrange(yeardata.shape[0]):
+    cumulative_weight += weights[yeardata[i]["race"]]
+    if cumulative_weight >= last_ran:
+      break
+
+  print "%i qualifiers from %i required to reach %i's total" % (i, year, year-1)
+  print "They meet a margin of %i seconds" % (yeardata[i][margin_field])
+
+
+# experimentation
+def stage2_analysis(data, year, last_cutoff, margin_field='margin'):
+  yeardata = np.sort(data[data["year"] == year], order=margin_field)[::-1]
+  has_races = np.array(list(set(yeardata["race"])))
+  lastyeardata = np.sort(data[data["year"] == (year - 1)], order=margin_field)[::-1]
+  lastyeardata = lastyeardata[np.in1d(lastyeardata["race"], has_races)]
+
+  last_met_cutoff = lastyeardata[lastyeardata[margin_field] >= last_cutoff].shape[0]
+
+  last_ran = lastyeardata[lastyeardata["ran"] == 1].shape[0]
+
+  registration_rate = float(last_ran) / last_met_cutoff
+  print "For %i, %.2f%% of qualifiers registered." % (year-1, registration_rate*100)
+
+  weights = []
+  for r in xrange(len(RACES)):
+
+    racedata = lastyeardata[lastyeardata["race"] == r]
+
     n_ran = racedata[racedata["ran"] == 1].shape[0]
     n_met_cutoff = racedata[racedata[margin_field] >= last_cutoff].shape[0]
     weights.append((float(n_ran) / n_met_cutoff) if n_met_cutoff > 0 else 0)

@@ -71,8 +71,8 @@ def add_margin(d):
   m = []
   n = [] # max age group margin
   for rid, record in d.iterrows():
-    m.append(QUAL_SECS[int(record["Age Group"])] - int(record["Time"]))
-    n.append(QUAL_SECS[int(record["Max Age Group"])] - int(record["Time"]))
+    m.append((QUAL_SECS[int(record["Age Group"])] - int(record["Time"])) if int(record["Time"]) != 0 else -100000)
+    n.append((QUAL_SECS[int(record["Max Age Group"])] - int(record["Time"])) if int(record["Time"]) != 0 else -100000)
   d["Margin"] = m
   d["MAG Margin"] = n
 
