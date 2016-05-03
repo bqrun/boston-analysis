@@ -30,7 +30,7 @@ use_races = np.array(range(len(RACES)))
 
 def main():
   display_registration(data, margin_field="max_margin", display_format="html")
-  margin_histogram(data, 2012, 2016)
+  margin_histogram(data, 2012, 2017)
   for year in range(2012, 2018):
     print
     print "Qualifying year %i" % year
