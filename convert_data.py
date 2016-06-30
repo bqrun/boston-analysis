@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-RACES = ["bayshore", "baystate", "bigcottonwood", "berlin", "boston", "california_intl", "chicago", "columbus", "erie", "eugene", "grandmas", "houston", "indianapolis", "lehigh", "mcm", "mountains2beach", "nyc", "ottawa", "philadelphia", "portland", "richmond", "santarosa", "stgeorge", "steamtown", "toronto", "twincities", "vermont"]
-# used to be top 25: "eugene", "vermont"
+RACES = ["bayshore", "baystate", "bigcottonwood", "berlin", "boston", "california_intl", "chicago", "columbus", "erie", "eugene", "grandmas", "houston", "indianapolis", "lehigh", "london", "mcm", "mohawkhudson", "mountains2beach", "nyc", "ottawa", "philadelphia", "portland", "richmond", "santarosa", "stgeorge", "steamtown", "toronto", "twincities", "vermont", "wineglass"]
+# includes the top 25 for any of the past 3 years
 
 CUTOFFS = {"2016": 147, "2015": 62, "2014": 98, "2013": 0, "2012": 74} # seconds
 

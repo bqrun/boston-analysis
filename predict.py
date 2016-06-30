@@ -1,9 +1,8 @@
 import numpy as np
 
 
-RACES = ["bayshore", "baystate", "bigcottonwood", "berlin", "boston", "california_intl", "chicago", "columbus", "erie", "eugene", "grandmas", "houston", "indianapolis", "lehigh", "mcm", "mountains2beach", "nyc", "ottawa", "philadelphia", "portland", "richmond", "santarosa", "stgeorge", "steamtown", "toronto", "twincities", "vermont"]
-# for 2014: "eugene", "vermont"
-# for 2015: "bigcottonwood", "toronto"
+RACES = ["bayshore", "baystate", "bigcottonwood", "berlin", "boston", "california_intl", "chicago", "columbus", "erie", "eugene", "grandmas", "houston", "indianapolis", "lehigh", "london", "mcm", "mohawkhudson", "mountains2beach", "nyc", "ottawa", "philadelphia", "portland", "richmond", "santarosa", "stgeorge", "steamtown", "toronto", "twincities", "vermont", "wineglass"]
+# includes the top 25 for any of the past 3 years
 
 RACES2017 = ["baystate", "berlin", "boston", "california_intl", "chicago", "columbus", "houston", "indianapolis", "mcm", "nyc", "philadelphia", "portland", "richmond", "stgeorge", "steamtown", "twincities"]
 RACES2016 = ["bayshore", "baystate", "berlin", "boston", "california_intl", "chicago", "columbus", "erie", "eugene", "grandmas", "houston", "indianapolis", "lehigh", "mcm", "mountains2beach", "nyc", "ottawa", "philadelphia", "portland", "richmond", "santarosa", "stgeorge", "steamtown", "twincities", "vermont"]
