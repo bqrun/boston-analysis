@@ -29,7 +29,7 @@ use_races = np.array(range(len(RACES)))
 
 def main():
   display_registration(data, margin_field="max_margin", display_format="html")
-  margin_histogram(data, 2012, 2017)
+  reg_by_margin(data, 2012, 2017)
   for year in range(2012, 2018):
     print
     print "Qualifying year %i" % year
@@ -38,107 +38,6 @@ def main():
       simple_analysis(data, year, CUTOFFS[year-1], margin_field='margin')
       stage1_analysis(data, year, CUTOFFS[year-1], margin_field='max_margin')
       stage2_analysis(data, year, CUTOFFS[year-1], margin_field='max_margin')
-
-'''
-  yeardata = np.sort(data[data["year"] == year], order=margin_field)[::-1]
-  yeardata = yeardata[np.in1d(yeardata["race"], use_races)]
-  has_races = np.array(list(set(yeardata["race"])))
-  print "%i records for %i" % (yeardata.shape[0], year)
-
-  if yeardata.shape[0] < 1:
-    print "No data for %s" % year
-    continue
-
-  # compute weights per race
-  register_rate = np.zeros(len(RACES), dtype='f4')
-
-  # we can get actual qualifiers who met cutoff
-  if CUTOFFS.has_key(year):
-    print "%i cutoff: %i sec" % (year, CUTOFFS[year])
-    met_cutoff = yeardata[yeardata[margin_field] >= CUTOFFS[year]].shape[0]
-    print "For %i, %i met the cutoff." % (year, met_cutoff)
-    total_registration_rate = float(total_ran) / met_cutoff
-    print "Registration rate: %f" % (total_registration_rate)
-    print "Expected registrants: %i" % (float(total_ran) / met_cutoff * total_qualifiers)
-    print "Met cutoff: %i" % (met_cutoff)
-    print "Actually ran: %i" % (total_ran)
-    print "Proportion of field: %f" % (float(total_ran) / FIELD_SIZES[year])
-
-    for r in xrange(len(RACES)):
-      met_cutoff = racedata[r][racedata[r][margin_field] >= CUTOFFS[year]].shape[0]
-      ran = racedata[r][racedata[r]["ran"] == 1].shape[0]
-      register_rate[r] = float(ran) / max(1, met_cutoff)
-
-  # if we have cutoff data too, we can produce the expected registrants even though we also know the truth
-  if CUTOFFS.has_key(last_year):
-    print "%s cutoff: %i seconds" % (last_year, CUTOFFS[last_year])
-
-    lastyeardata = np.sort(data[data["year"] == last_year], order=margin_field)[::-1]
-    # filter down to the set of races for the current year
-    lastyeardata = lastyeardata[np.in1d(lastyeardata["race"], has_races)]
-
-
-    # using this year's true registration rates (near perfect "prediction"):
-    predicted_margins = [(yeardata[i][margin_field], register_rate[yeardata[i]["race"]]) for i in xrange(yeardata.shape[0])]
-    # using last year's registration rates
-    predicted_margins = [(yeardata[i][margin_field], register_est[yeardata[i]["race"]]) for i in xrange(yeardata.shape[0])]
-
-    last_met_cutoff = lastyeardata[lastyeardata[margin_field] >= CUTOFFS[last_year]]
-    #last_ran = sum(register_est[last_met_cutoff[i]["race"]] for i in xrange(last_met_cutoff.shape[0]))
-    last_ran = lastyeardata[lastyeardata["ran"] == 1].shape[0]
-
-    n_met = sum(m[1] for m in predicted_margins if m[0] >= CUTOFFS[last_year])
-
-    # add simulated qualifiers from ALL OTHER marathons using:
-    # last year's average registration rate
-    # 2014's margin distribution
-
-    #other_ran = FIELD_SIZE[last_year]*FOR_QUAL - last_ran
-    last_registration_rate = float(last_ran) / last_met_cutoff
-    #est_other_met_cutoff = other_ran / last_registration_rate
-
-    print "Estimated qualifiers from all other marathons: %i" % 0#est_other_qual
-
-    # adjust for qualification difference:
-    last_qual = lastyeardata[lastyeardata[margin_field] >= 0].shape[0]
-    expected_registrants = float(last_ran) / last_met_cutoff.shape[0] * last_qual
-    print "Predicted registrants: %i" % expected_registrants
-
-    # adjust for difference in field size:
-    target_ran = last_ran * float(FIELD_SIZES[year]) / FIELD_SIZES[last_year]
-    print "Predicted runners: %i" % target_ran
-
-    target_ran = lastyeardata[lastyeardata["ran"] == 1].shape[0] # last year's # runners
-
-    tot = 0
-    prev = None
-    for m in predicted_margins:
-      if m[0] != prev:
-        prev = m[0]
-      tot += m[1]
-      if tot >= target_ran:
-        predicted_cutoff = m[0]
-        break
-
-    print "For %s, %.2f people from these races ran." % (last_year, last_ran)
-    print "For %s, %.2f people who met the %s cutoff would register." % (year, n_met, last_year)
-    print "For %s, %.2f people would get to run given the field size difference (%i - %i)." % (year, target_ran, FIELD_SIZES[last_year], FIELD_SIZES[year])
-    print "For %s, %.2f registering people would meet a cutoff of %i seconds." % (year, target_ran, predicted_cutoff)
-
-
-  # update average recidivism
-  for r in xrange(len(RACES)):
-    # weights are the fraction of *people who met the cutoff* who actually ran
-    register_history[r].append(register_rate[r])
-    regs = [a for a in register_history[r] if a > 0]
-    # running average:
-    #register_est[r] = sum(regs)/max(1, len(regs))
-    # last 2 avg:
-    #register_est[r] = (regs[-1] + regs[-2])/2 if len(regs) >= 2 else 0
-    # last:
-    register_est[r] = regs[-1] if len(regs) > 0 else 0
-    print RACES[r], ["%.4f" % reg for reg in register_history[r]], "%.4f" % register_rate[r]
-'''
 
 
 def display_year_data(data, year, races=RACES, margin_field='margin', display_format="tab"):
@@ -265,26 +164,52 @@ def display_registration(data, races=RACES, margin_field='margin', display_forma
   print "]"
 
 
-def margin_histogram(data, start_year, end_year, margin_field='margin'):
+def reg_by_margin(data, start_year, end_year, margin_field='margin'):
   margin_hist = []
+  rate_hist = []
+  ran_hist = []
   for year in range(start_year, end_year+1):
     yeardata = np.sort(data[data["year"] == year], order=margin_field)[::-1]
+    print yeardata[yeardata[margin_field] >= 0][-1926], "cutoff:", yeardata[yeardata[margin_field] >= 0][-1926][margin_field]
     n_qualifiers = yeardata[yeardata[margin_field] >= 0].shape[0]
     margin_distr = np.zeros(1000)
+    ran_distr = np.zeros(1000)
     for a in yeardata:
       if a[margin_field] > 10000 or a[margin_field] < 0:
         continue
-      margin_distr[int(a[margin_field])/10] += 1.0 #/n_qualifiers
+      margin_distr[int(a[margin_field])/10] += 1.0
+      if a["ran"] == 1:
+        ran_distr[int(a[margin_field])/10] += 1.0
     if len(margin_hist) == 0:
       for i in xrange(len(margin_distr)):
         margin_hist.append([i*10, margin_distr[i]])
+        ran_hist.append([i*10, ran_distr[i]])
+        rate_hist.append([i*10, ran_distr[i] / margin_distr[i]])
     else:
       for i in xrange(len(margin_distr)):
         margin_hist[i].append(margin_distr[i])
+        ran_hist[i].append(ran_distr[i])
+        rate_hist[i].append(ran_distr[i] / margin_distr[i])
+
+  print "Qualifiers:"
   print "["
   print "  ['Margin'," + ','.join("'%i'" % y for y in range(start_year, end_year+1)) + "],"
   for c in margin_hist[:401]:
     print "  [" + ','.join(["%i" % a for a in c]) + "],"
+  print "]"
+
+  print "Ran:"
+  print "["
+  print "  ['Margin'," + ','.join("'%i'" % y for y in range(start_year, end_year+1)) + "],"
+  for c in ran_hist[:401]:
+    print "  [" + ','.join(["%i" % a for a in c]) + "],"
+  print "]"
+
+  print "Register rate:"
+  print "["
+  print "  ['Margin'," + ','.join("'%i'" % y for y in range(start_year, end_year+1)) + "],"
+  for c in rate_hist[:401]:
+    print "  [" + ','.join(["%.4f" % a for a in c]) + "],"
   print "]"
 
 
@@ -337,6 +262,8 @@ def stage1_analysis(data, year, last_cutoff, margin_field='margin'):
 
 
 # experimentation
+# weight qualifiers by the registration rate for their race AND registration rate by qual margin
+# pick the top last_met_cutoff people
 def stage2_analysis(data, year, last_cutoff, margin_field='margin'):
   yeardata = np.sort(data[data["year"] == year], order=margin_field)[::-1]
   has_races = np.array(list(set(yeardata["race"])))
@@ -359,13 +286,32 @@ def stage2_analysis(data, year, last_cutoff, margin_field='margin'):
     n_met_cutoff = racedata[racedata[margin_field] >= last_cutoff].shape[0]
     weights.append((float(n_ran) / n_met_cutoff) if n_met_cutoff > 0 else 0)
 
+  # compute weights by margin (<5, 5-10, 10-20, 20+)
+  margin_weights = []
+  for min_margin, max_margin in [(0, 300), (300, 600), (600, 1200), (1200, 999999999)]:
+    margindata = lastyeardata[min_margin <= lastyeardata[margin_field]]
+    margindata = margindata[max_margin > margindata[margin_field]]
+    n_ran = margindata[margindata["ran"] == 1].shape[0]
+    n_met_cutoff = margindata[margindata[margin_field] >= last_cutoff].shape[0]
+    margin_weights.append((float(n_ran) / n_met_cutoff) if n_met_cutoff > 0 else 0)
+
   cumulative_weight = 0
   for i in xrange(yeardata.shape[0]):
-    cumulative_weight += weights[yeardata[i]["race"]]
+    cumulative_weight += weights[yeardata[i]["race"]] / registration_rate * margin_weights[0 if yeardata[i][margin_field] < 300 else (1 if yeardata[i][margin_field] < 600 else (2 if yeardata[i][margin_field] < 1200 else 3))]
+    if yeardata[i][margin_field] < 0:
+      break
+
+  print "%i qualifiers from %i are expected to register" % (i, year)
+  print "Cumulative expected registrants:", cumulative_weight
+
+  cumulative_weight = 0
+  for i in xrange(yeardata.shape[0]):
+    cumulative_weight += weights[yeardata[i]["race"]] / registration_rate * margin_weights[0 if yeardata[i][margin_field] < 300 else (1 if yeardata[i][margin_field] < 600 else (2 if yeardata[i][margin_field] < 1200 else 3))]
     if cumulative_weight >= last_ran:
       break
 
   print "%i qualifiers from %i required to reach %i's total" % (i, year, year-1)
+  print "Cumulative expected registrants:", cumulative_weight
   print "They meet a margin of %i seconds" % (yeardata[i][margin_field])
 
 
